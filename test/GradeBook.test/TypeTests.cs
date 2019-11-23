@@ -5,7 +5,25 @@ namespace GradeBook.test
 {
     public class TypeTests
     {
-          [Fact]
+        public delegate string WriteLogDelegate(string Message);
+        [Fact]
+        public void WriteLogDelegateCanPointToMethod()
+        {
+        //Given
+        WriteLogDelegate log;
+        log = ReturnMessage;
+        //When
+        var result = log("Hello");
+        
+        //Then
+        Assert.Equal("Hello", result);
+        }
+        public string ReturnMessage(String msg)
+        {
+            return msg;
+        } 
+
+        [Fact]
         public void cSharpPassByRef()
         {
             //var book1 = GetBook("Book1");
