@@ -10,6 +10,7 @@ namespace GradeBook
              
             double grade;
             string input;
+
             Book book = new Book("Samin book");
             while(true){
                 
@@ -21,12 +22,13 @@ namespace GradeBook
                 try{
                     grade = double.Parse(input);
                     book.AddGrade(grade);
+                    book.AddGrade('A');
                 }
                 catch(ArgumentException ex){
                     System.Console.WriteLine( $"Invalid Argument {ex}");
                 }
                 catch(FormatException ex){
-                    System.Console.WriteLine("Can only enter grades between 0 and 100 {ex}");
+                    System.Console.WriteLine($"Can only enter grades between 0 and 100 {ex}");
                 }
                 catch(Exception ex){
                     System.Console.WriteLine(ex);
@@ -43,7 +45,9 @@ namespace GradeBook
             // book.AddGrade(90.9);
            
             var stats = new Statistics();
+            //book.Name = "Samin new book";
             stats =  book.GetStatistics();
+            System.Console.WriteLine($"The book name {book.Name}");
             Console.WriteLine($"Highest grade is {stats.highestGrade:N1}");
             Console.WriteLine($"Lowest grade is {stats.lowestGrade:N1}");
             Console.WriteLine($"Average grade for {book.Name} is {stats.averageGrade:N2}");

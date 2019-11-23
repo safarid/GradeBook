@@ -6,16 +6,18 @@ namespace GradeBook
     {
         //Adding  new comments to try commit
         
-        public Book(String name)
+        public Book(string name)
         {
             grades = new List<double>();
             Name = name;
+            category = "";
 
         }
         
         public void AddGrade(double grade)
         {
                
+               //category = "testing";
                if (grade>=0 && grade <=100) {
                 grades.Add(grade);
                }
@@ -25,7 +27,7 @@ namespace GradeBook
                }
         }
 
-        public void AddLetterGrade(char letter)
+        public void AddGrade(char letter)
         {
             switch (letter)
             {   
@@ -51,7 +53,8 @@ namespace GradeBook
             var stats = new Statistics();
               
             var result = 0.0;
-            foreach(var grade in grades){
+            foreach(var grade in grades)
+            {
                 
                 stats.highestGrade = Math.Max(stats.highestGrade, grade);
                 stats.lowestGrade = Math.Min(stats.lowestGrade, grade);
@@ -67,12 +70,16 @@ namespace GradeBook
             stats.averageGrade = result/grades.Count;
             return stats;
         }
-
-      
-              
+     
         //instance fields      
         public   List <double> grades;
-        public string Name;
-    }
+
+        public string Name
+        {   
+            get; 
+            set;
+        }
+        private readonly string category;
+    }   
 }
     
