@@ -58,3 +58,5 @@ src/GradeBook/obj/Debug/netcoreapp3.0/GradeBook.dll
 src/GradeBook/obj/Debug/netcoreapp3.0/GradeBook.pdb
 src/GradeBook/bin/Debug/netcoreapp3.0/GradeBook.dll
 src/GradeBook/bin/Debug/netcoreapp3.0/GradeBook.pdb
+src/GradeBook/bin/Debug/netcoreapp3.0/GradeBook.deps.json
+src/GradeBook/bin/Debug/netcoreapp3.0/GradeBook.exe

@@ -5,6 +5,7 @@ namespace GradeBook
     public class Book
     {
         //Adding  new comments to try commit
+        public delegate void GradeAddedDelegate(Object o, EventArgs e);
         
         public Book(string name)
         {
@@ -20,10 +21,13 @@ namespace GradeBook
                //category = "testing";
                if (grade>=0 && grade <=100) {
                 grades.Add(grade);
+
+                GradeAdded(this, new EventArgs());
+                
                }
                else {
                    //System.Console.WriteLine("Add a valid grade");
-                   throw new ArgumentException($"Invalid {nameof(grade)}");
+                   throw new ArgumentException($"Invalid {nameof(grade)} added, please add valid grade");
                }
         }
 
@@ -70,7 +74,8 @@ namespace GradeBook
             stats.averageGrade = result/grades.Count;
             return stats;
         }
-     
+        public event GradeAddedDelegate GradeAdded;
+
         //instance fields      
         public   List <double> grades;
 
