@@ -1,21 +1,70 @@
 using System;
 using System.Collections.Generic;
+//using IBook;
 namespace GradeBook
 {
-    public class Book
+    public delegate void GradeAddedDelegate(object o, EventArgs e);
+    public class NamedObject
+    {
+         
+        public NamedObject(string name)
+        {
+            Name = name;
+        }
+
+        public string Name
+        {   
+            get; 
+            set;
+        }  
+    }
+     public interface IBook
+    {
+        void AddGrade(double grade);
+        Statistics GetStatistics();
+        event GradeAddedDelegate GradeAdded;
+        string Name{get;}
+    
+    }
+    public abstract class Book : NamedObject, IBook
+    {
+        public Book(string name) : base(name)
+        {
+        }
+        public abstract void AddGrade(double grade);
+        public virtual Statistics GetStatistics(){
+            throw new NotImplementedException();
+
+        }
+        public virtual event GradeAddedDelegate GradeAdded;      
+    }
+    public class DiskBook : Book
+    {
+        public DiskBook(string name) : base(name)
+        {
+        }
+        public override event GradeAddedDelegate GradeAdded;
+        public override void AddGrade(double grade)
+        {
+        }
+        public override Statistics GetStatistics()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    #region InMemoryClass
+    public class InMemoryBook : Book
     {
         //Adding  new comments to try commit
-        public delegate void GradeAddedDelegate(Object o, EventArgs e);
-        
-        public Book(string name)
+        public InMemoryBook(string name):base(name)
         {
             grades = new List<double>();
             Name = name;
             category = "";
-
         }
-        
-        public void AddGrade(double grade)
+
+        public override void AddGrade(double grade)
         {
                
                //category = "testing";
@@ -23,7 +72,7 @@ namespace GradeBook
                 grades.Add(grade);
 
                 GradeAdded(this, new EventArgs());
-                
+                System.Console.WriteLine("in bookclass after gradeadded event ");
                }
                else {
                    //System.Console.WriteLine("Add a valid grade");
@@ -51,7 +100,7 @@ namespace GradeBook
             }
         }
         
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
 
             var stats = new Statistics();
@@ -74,17 +123,12 @@ namespace GradeBook
             stats.averageGrade = result/grades.Count;
             return stats;
         }
-        public event GradeAddedDelegate GradeAdded;
-
+        public override event GradeAddedDelegate GradeAdded;
         //instance fields      
-        public   List <double> grades;
-
-        public string Name
-        {   
-            get; 
-            set;
-        }
+        public   List <double> grades;     
         private readonly string category;
     }   
 }
+#endregion
+
     

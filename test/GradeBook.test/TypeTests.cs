@@ -27,17 +27,17 @@ namespace GradeBook.test
         public void cSharpPassByRef()
         {
             //var book1 = GetBook("Book1");
-            Book book1;
+            InMemoryBook book1;
             getBookSetName(out book1, "new nameout");
 
             Assert.Equal("namedincallingfunction", book1.Name);
         }
 
-        private void getBookSetName(out Book book1, string name)
+        private void getBookSetName(out InMemoryBook book1, string name)
         {
            
             //x
-            book1 = new Book(name);
+            book1 = new InMemoryBook(name);
             book1.Name = "namedincallingfunction";
 
         }
@@ -51,9 +51,9 @@ namespace GradeBook.test
             Assert.Equal("Book1", book1.Name);
         }
 
-        private void getBookSetName(Book book1, string name)
+        private void getBookSetName(InMemoryBook book1, string name)
         {
-            book1 = new Book(name);
+            book1 = new InMemoryBook(name);
         }
  
         [Fact]
@@ -65,7 +65,7 @@ namespace GradeBook.test
             Assert.Equal("name1", book1.Name);
         }
 
-        private void setBookName(Book book1, string name)
+        private void setBookName(InMemoryBook book1, string name)
         {
             book1.Name = name;
 
@@ -92,9 +92,9 @@ namespace GradeBook.test
             Assert.Equal("Book2", book2.Name);
         }
 
-        Book GetBook(String name)
+        InMemoryBook GetBook(String name)
         {
-            return (new Book(name));
+            return (new InMemoryBook(name));
         }
     }
 }
