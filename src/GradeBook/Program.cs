@@ -9,7 +9,8 @@ namespace GradeBook
 
         static void Main(string[] args)
         {
-            IBook book = new InMemoryBook("Samin book");
+            //IBook book = new InMemoryBook("Samin book");
+            IBook book = new DiskBook("Saminbook");
             book.GradeAdded += OnGradeAdded;
             System.Console.WriteLine("after book.gradeadded delegate attached");
 
